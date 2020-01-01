@@ -2,7 +2,7 @@
 from ionopy.process import filename
 from ionopy.process import operations as opr
 import pandas as pd
-
+import numpy as np
 #opr?
 def read_tec(station='',sdate='',edate='',sdoy='',edoy='',year='',obs='gps',Reciever='R',all=False):
 
