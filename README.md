@@ -19,7 +19,7 @@ pip install tables
 pip install ionopy
 ```
 
-### Documentation
+## Documentation
 
 Tutorial for analysis module can be found [here](ionopy/analysis/analysis_readme.md)
 
