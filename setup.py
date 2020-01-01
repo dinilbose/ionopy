@@ -8,13 +8,13 @@ with open("README.md", "r") as fh:
 setup(
   name = 'ionopy',         # How you named your package folder (MyLib)
   packages = ['ionopy'],   # Chose the same as "name"
-  version = '0.0.2',      # Start with a small number and increase it with every change you make
+  version = '0.0.3',      # Start with a small number and increase it with every change you make
   license='gpl-3.0',        # Chose a license from here: https://help.github.com/articles/licensing-a-repository
   description = 'Package for processing and analysis of GNSS data',   # Give a short description about your library
   author = 'Dinil Bose P',                   # Type in your name
   author_email = 'dinilbose@gmail.com',      # Type in your E-Mail
   url = 'https://github.com/dinilbose/ismrpy',   # Provide either the link to your github or to your website
-  download_url = 'https://github.com/dinilbose/ionopy/archive/0.0.2.tar.gz',    # I explain this later on
+  download_url = 'https://github.com/dinilbose/ionopy/archive/0.0.3.tar.gz',    # I explain this later on
   keywords = ['ionopy', 'pandas'], # Keywords that define your package best
   long_description=long_description,
   long_description_content_type="text/markdown",

@@ -1,0 +1,9 @@
+README.md
+setup.cfg
+setup.py
+ionopy/__init__.py
+ionopy.egg-info/PKG-INFO
+ionopy.egg-info/SOURCES.txt
+ionopy.egg-info/dependency_links.txt
+ionopy.egg-info/requires.txt
+ionopy.egg-info/top_level.txt
