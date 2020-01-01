@@ -5,7 +5,7 @@ Package for processing and analysis of GNSS data
 ## Getting Started
 ### Prerequisites
 
-Things needed before installation of package
+Things needed before installation of the package
 ```
 pip install numpy
 pip install pandas
@@ -18,6 +18,10 @@ pip install tables
 ```
 pip install ionopy
 ```
+
+### Documentation
+
+Tutorial for analysis module can be found [here](ionopy/analysis/analysis_readme.md)
 
 ## Authors
 
