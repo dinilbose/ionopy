@@ -1,4 +1,4 @@
-# ismrpy
+# ionopy
 
 Package for processing and analysis of GNSS data
 
