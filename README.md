@@ -9,6 +9,8 @@ Things needed before installation of package
 ```
 pip install numpy
 pip install pandas
+pip install unlzw
+pip install tables
 ```
 
 ### Installation
