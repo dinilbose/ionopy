@@ -1,6 +1,6 @@
 #from ionopy as ionopy.filename
 from ionopy.process import filename
-import ionopy.process.operations as opr
+from ionopy.process import operations as opr
 import pandas as pd
 
 #opr?

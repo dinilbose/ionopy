@@ -1,6 +1,7 @@
 #import numpy as np
 #from . import operations
-import ionopy.process.operations as opr
+#import ionopy.process.operations as opr
+from ionopy.process import operations as opr
 #import ./operations as opr
 import pandas as pd
 import os
