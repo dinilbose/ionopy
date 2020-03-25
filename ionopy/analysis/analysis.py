@@ -9,7 +9,7 @@ def read_tec(station='',sdate='',edate='',sdoy='',edoy='',year='',obs='gps',Reci
     sdate, edate, sdoy, edoy, year=opr.set_date_parameters(sdate=sdate, edate=edate, sdoy=sdoy, edoy=edoy, year=year)
     if all:
 
-        names=filename.load_files(station='pots',year=2015,filetype='tec',sat='gps')
+        names=filename.load_files(station='pots',year=year,filetype='tec',sat='gps')
 
         data=pd.DataFrame()
         for name in names:
