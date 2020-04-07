@@ -8,7 +8,7 @@ with open("README.md", "r") as fh:
 setup(
   name = 'ionopy',         # How you named your package folder (MyLib)
   packages = ['ionopy','ionopy.process','ionopy.analysis'],   # Chose the same as "name"
-  version = '0.0.8',      # Start with a small number and increase it with every change you make
+  version = '0.0.9',      # Start with a small number and increase it with every change you make
   license='gpl-3.0',        # Chose a license from here: https://help.github.com/articles/licensing-a-repository
   description = 'Package for processing and analysis of GNSS data',   # Give a short description about your library
   author = 'Dinil Bose P',                   # Type in your name
