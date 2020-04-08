@@ -3,11 +3,17 @@ import datetime
 import logging
 import io
 import unlzw
-
+from ionopy.process import filename
+from ionopy.process import operations as opr
+import pandas as pd
 #from mpl_toolkits.basemap import Basemap
 import matplotlib.pyplot as plt
 
-"Function _read_ionex_header and read_tec are obtained from RMExtract"
+
+import os
+from ftplib import FTP
+import errno
+#"Function _read_ionex_header and read_tec are obtained from RMExtract"
 
 
 def _read_ionex_header(filep):
@@ -69,7 +75,7 @@ def _read_ionex_header(filep):
     return exponent, lonarray, latarray, timearray
 
 
-def read_tec(filename, _use_filter=None):
+def read_tec_file(filename, _use_filter=None):
     """ returns TEC, RMS longitude, lattitude and time read from an IONEX file.
     Args:
         filename (string) : the full path to the IONEXfile
@@ -150,7 +156,7 @@ def nearest_tec(filename='',time=[],lon=[],lat=[],display=True):
     output time and tec
 
     """
-    tecarray, rmsarray, lonarray, latarray, timearray=read_tec(filename)
+    tecarray, rmsarray, lonarray, latarray, timearray=read_tec_file(filename)
     lon_idx=nearest_points(lonarray,float(lon))
     lat_idx=nearest_points(latarray,float(lat))
     if display:
@@ -162,24 +168,87 @@ def nearest_tec(filename='',time=[],lon=[],lat=[],display=True):
         tec=tecarray[:,lat_idx,lon_idx]
     return timearray,tec
 
-def ionex_plot(sdate='',lat='',lon='',ax=None,legend=True):
-"""
-ionex plot
-"""
+def read_tec(sdoy='',edoy='',sdate='',edate='',year='',obs='codg',lat='',lon='',ax=None,legend=True):
+    """
+    Reads TEC from Ionex file. For a specfic lattitude and longitude.
 
-    institute=['ehrg','igsg','uqrg','esrg','codg','jplg','upcg','corg','igrg','jprg','uprg']
-    institute=['uqrg','codg','jplg']
+    obs=['ehrg','igsg','uqrg','esrg','codg','jplg','upcg','corg','igrg','jprg','uprg']
 
-    for ins in institute:
+    """
+
+    sdate, edate, sdoy, edoy, year=opr.set_date_parameters(sdate=sdate, edate=edate, sdoy=sdoy, edoy=edoy, year=year)
+    Data_whole=pd.DataFrame()
+    #print('hii')
+    for doy in range(int(sdoy),int(edoy)+1):
+
+        doy, date, year=opr.set_parameter(sdoy=doy,year=year)
+        #print(doy,year,date)
+        ionex_name=filename.find_filename(filetype='ionex',obs=obs,sdate=date,year=year)
+
+#    for ins in institute:
         #files='/home/dlab/Desktop/Project/ionopy/test/ionex/'+i
-        ionex_name=filename.find_filename(filetype='ionex',obs=ins,sdate=sdate)
-        time,tec=nearest_tec(filename=ionex_name,lat=lat,lon=lon)
+        time,tec=nearest_tec(filename=ionex_name,lat=lat,lon=lon,display=False)
         ff=str((24/(len(time)-1)))+'H'
         f=len(time)
-        print(f)
-        a=pd.date_range(sdate,periods=f,freq=ff)
+        #print(f)
+        a=pd.date_range(date,periods=f,freq=ff)
         b=a.to_frame()
         b['ionex_tec']=tec
-        b.ionex_tec.plot(label=ins,legend=legend,ax=ax)
-    return b
+        del b[0]
+        b['Lat']=lat
+        b['Lon']=lon
+
+        Data_whole=Data_whole.append(b)
+        #b.ionex_tec.plot(label=ins,legend=legend,ax=ax)
+    Data_whole=Data_whole.loc[~Data_whole.index.duplicated(keep='first')]
+    return Data_whole
+
+
+def download(obs='',sdate='',edate='',sdoy='',edoy='',year='',Reciever='R'):
+
+    #Initial settings
+    if edate == '' and edoy=='':
+        date_string='Y'
+        sdate, edate, sdoy, edoy, year=opr.set_date_parameters(sdate=sdate, edate=edate, sdoy=sdoy, edoy=edoy, year=year)
+    else:
+        sdate, edate, sdoy, edoy, year=opr.set_date_parameters(sdate=sdate, edate=edate, sdoy=sdoy, edoy=edoy, year=year)
+
+    #Path creation
+    names=filename.find_filename(filetype='ionex',obs=obs,sdate=sdate)
+    path=os.path.dirname(names)
+    try:
+        os.makedirs(path)
+    except OSError as exc:
+        if exc.errno != errno.EEXIST:
+            raise
+        else:
+            print ("Already exist %s " % path)
+        pass
+
+    #new="ftp://cddis.nasa.gov/gnss/products/ionex/20$yearshort/$lday/$i"$lday"0."$yearshort"i.Z"
+
+
+    ftp = FTP("cddis.nasa.gov","anonymous","anonymous")
+
+    #File download
+    for doy in range(int(sdoy),int(edoy)+1):
+
+        doy, date, year=opr.set_parameter(sdoy=doy,year=year)
+        doy_str=opr.convert_num_to_str(num=doy,padding=3)
+        year_short=str(year)[-2:]
+        nam=filename.find_filename(filetype='ionex',obs=obs,sdate=date,pathname=False)
+
+        file_name='gnss/products/ionex/'+str(year)+'/'+doy_str+'/'+nam
+        names=filename.find_filename(filetype='ionex',obs=obs,sdate=date)
+        print(names)
+        if not os.path.isfile(names):
+            try:
+                ftp.retrbinary("RETR " + file_name ,open(names, 'wb').write)
+            except:
+                print("Error in download "+names)
+
+                if os.stat(names).st_size==0:
+                    os.remove(names)
+
+
 

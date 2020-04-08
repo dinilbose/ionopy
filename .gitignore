@@ -3,3 +3,4 @@
 /dist/
 /ionopy.egg-info/
 /ionopy.egg-info/
+*.pyc

@@ -10,7 +10,7 @@ from os.path import expanduser
 home = expanduser("~")
 
 Data_Repository='/home/dlab/Desktop/Project/sba02/Data'
-Data_Repository='/media/dlab/Datadisk/Germany/Data'
+#Data_Repository='/media/dlab/Datadisk/Germany/Data'
 
 Data_Repository=home+'/Data_ionopy'
 
@@ -135,16 +135,16 @@ def load_files(filetype='', obs='mixed',sat='',ext='',station='',sdate='',edate=
         name = [filename for filename in os.listdir(path) if filename.startswith(station) and filename.endswith(new)]
         path_name=[path+'/' + x for x in name]
 
+
+    if filetype=='ionex':
+        path=Data_Repository+'/'+str(year)+'/'+'Ionex'+'/'+obs
+        new=str(year)[2:4]+'i'
+        #print(new)
+        name = [filename for filename in os.listdir(path) if filename.startswith(obs) and filename.endswith(new)]
+        path_name=[path+'/' + x for x in name]
+
     if pathname:
         name=path_name
     name.sort()
     return name
-
-
-
-
-
-
-
-
 
