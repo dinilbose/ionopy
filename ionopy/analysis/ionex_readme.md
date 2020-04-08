@@ -30,4 +30,5 @@ ionex_tec=ionex.read_tec(sdoy=1,edoy=20,obs='codg',year=2014,lat=52.379,lon=13.0
 lat,lon given for POTS station
 
 Comparision plot for POTS station on 1-1-2014
+![alt text](https://github.com/dinilbose/ionopy/blob/master/ionopy/documentation/Images/Tec_comparison_ionex.png)
 
