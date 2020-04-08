@@ -22,6 +22,8 @@ pip install ionopy
 ## Documentation
 
 Tutorial for analysis module can be found [here](ionopy/analysis/analysis_readme.md)
+Tutorial for ionex module can be found [here](ionopy/analysis/ionex_readme.md)
+
 
 ## Authors
 
