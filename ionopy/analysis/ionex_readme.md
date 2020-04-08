@@ -13,7 +13,7 @@ obs: Name of the institute
 ```
 from ionopy.analysis import ionex
 
-ionex.download(obs='codg',sdoy=1,edoy=20,year=2017)
+ionex.download(obs='codg',sdoy=1,edoy=20,year=2014)
 ```
 
 ## Reading TEC
@@ -25,5 +25,6 @@ lon, lat: Latitude and Logitude of the station or the location for TEC.
 sdate,edate,sdoy,edoy,year : All parameters can be used
 
 ```
-ionex_tec=ionex.read_tec(sdoy=1,edoy=20,obs='uqrg',year=2017,lon=10,lat=10)
+ionex_tec=ionex.read_tec(sdoy=1,edoy=20,obs='codg',year=2014,lat=52.379,lon=13.066)
 ```
+lat,lon given for POTS station
