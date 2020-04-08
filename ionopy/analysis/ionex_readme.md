@@ -28,3 +28,6 @@ sdate,edate,sdoy,edoy,year : All parameters can be used
 ionex_tec=ionex.read_tec(sdoy=1,edoy=20,obs='codg',year=2014,lat=52.379,lon=13.066)
 ```
 lat,lon given for POTS station
+
+Comparision plot for POTS station on 1-1-2014
+
