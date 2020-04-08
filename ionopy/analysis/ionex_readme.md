@@ -25,5 +25,5 @@ lon, lat: Latitude and Logitude of the station or the location for TEC.
 sdate,edate,sdoy,edoy,year : All parameters can be used
 
 ```
-b=ionex.read_tec(sdoy=1,edoy=20,obs='uqrg',year=2017,lon=10,lat=10)
+ionex_tec=ionex.read_tec(sdoy=1,edoy=20,obs='uqrg',year=2017,lon=10,lat=10)
 ```
