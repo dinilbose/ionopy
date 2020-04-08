@@ -19,7 +19,9 @@ ionex.download(obs='codg',sdoy=1,edoy=20,year=2017)
 ## Reading TEC
 
 obs : Name of the institute
+
 lon, lat: Latitude and Logitude of the station or the location for TEC.
+
 sdate,edate,sdoy,edoy,year : All parameters can be used
 
 ```
