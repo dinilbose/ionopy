@@ -193,7 +193,7 @@ def read_tec(sdoy='',edoy='',sdate='',edate='',year='',obs='codg',lat='',lon='',
         #print(f)
         a=pd.date_range(date,periods=f,freq=ff)
         b=a.to_frame()
-        b['ionex_tec']=tec
+        b['Ionex_vtec']=tec
         del b[0]
         b['Lat']=lat
         b['Lon']=lon
